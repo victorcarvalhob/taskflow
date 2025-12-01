@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+    <title>TaskFlow | Painel de Produtividade</title>
+</head>
+<body>
+    <!-- Header -->
+     <header class="header">
+        <button id="btnMenu" class="btn-menu" aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">
+            <span class="hamburguer" aria-hidden="true"></span>
+        </button>
+
+        <div class="logo">
+            <span>⚡</span>
+            <h1>TaskFlow</h1>
+        </div>
+
+        <nav class="nav">
+            <ul>
+                <li><a href="#dashboard" class="active">Dashboard</a></li>
+                <li><a href="#tarefas">Tarefas</a></li>
+                <li><a href="#relatorios">Relatórios</a></li>
+            </ul>
+        </nav>
+     </header>
+
+     <!-- Sidebar -->
+      <aside id="sidebar" class="sidebar" aria-hidden="true" aria-labelledby="btnMenu">
+        <div class="sidebar-top">
+            <div class="sidebar-brand">
+                <span>⚡</span>
+                <strong>TaskFlow</strong>
+            </div>
+            <button id="btnCloseSidebar" class="btn-close-sidebar" aria-label="Fechar menu">✕</button>
+        </div>
+
+        <div class="sidebar-content">
+            <nav class="sidebar-nav" role="navigation">
+                <ul>
+                    <li><a href="#dashboard" class="sidebar-link">Dashboard</a></li>
+                    <li><a href="#tarefas" class="sidebar-link">Tarefas</a></li>
+                    <li><a href="#relatorios" class="sidebar-link">Relatórios</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-actions">
+                <button id="novaTarefaBtnSidebar" class="btn-ghost">+ Nova Tarefa</button>
+                <button id="toggleTipoGraficoSidebar" class="btn-ghost">Alterar Gráfico</button>
+            </div>
+
+            <div class="sidebar-footer">
+                <small>Desenvolvido por <a href="https://github.com/victorcarvalhob">Victor Carvalho</a></small>
+            </div>
+        </div>
+      </aside>
+
+      <div id="sidebarOverlay" class="sidebar-overlay" tabindex="-1" aria-hidden="true"></div>
+
+     <!-- Dashboard -->
+      <main>
+        <section id="dashboard" class="section">
+            <h2>Visão Geral</h2>
+            <div class="cards">
+                <article class="card">
+                    <h3>Tarefas Concluídas</h3>
+                    <p id="concluidas">0</p>
+                </article>
+
+                <article class="card">
+                    <h3>Tarefas Pendentes</h3>
+                    <p id="pendentes">0</p>
+                </article>
+
+                <article class="card">
+                    <h3>Eficiência</h3>
+                    <p id="eficiencia">0%</p>
+                </article>
+            </div>
+
+            <div class="grafico">
+                <canvas id="graficoProdutividade" width="400" height="200"></canvas>
+
+                <button id="toggleTipoGrafico" class="btn-grafico">Alterar Tipo</button>
+            </div>
+        </section>
+
+        <!-- Tarefas -->
+         <section id="tarefas" class="section">
+            <div class="tarefas-header">
+                <h2>Gerenciador de Tarefas</h2>
+                <button id="novaTarefaBtn">+ Nova Tarefa</button>
+            </div>
+
+            <div class="filtros">
+                <button data-filtro="todas" class="filtro ativo">Todas</button>
+                <button data-filtro="pendentes" class="filtro">Pendentes</button>
+                <button data-filtro="concluidas" class="filtro">Concluídas</button>
+                <button data-filtro="alta" class="filtro">Prioridade Alta</button>
+                <button data-filtro="media" class="filtro">Prioridade Média</button>
+                <button data-filtro="baixa" class="filtro">Prioridade Baixa</button>
+            </div>
+
+            <ul id="listaTarefas" class="lista-tarefas">
+
+            </ul>
+         </section>
+
+         <!-- Relatórios -->
+          <section id="relatorios" class="section">
+            <h2>Relatórios de Produtividade</h2>
+            <div id="relatorioConteudo">
+                <p>Nenhum dado disponível ainda. Complete algumas tarefas!</p>
+            </div>
+
+            <!-- Automação estilo Power Automate -->
+             <div id="automacaoContainer" class="automacao">
+                <h3>⚙️ Automação de Produtividade</h3>
+
+                <button id="executarAutomacao" class="btn-automacao">
+                    ▶ Executar Automação
+                </button>
+
+                <div id="logAutomacao" class="log-automacao oculto">
+                    
+                </div>
+             </div>
+          </section>
+      </main>
+
+      <!-- Modal de Nova Tarefa -->
+       <div id="modalTarefa" class="modal oculto">
+        <div class="modal-conteudo">
+            <h3>Adicionar Nova Tarefa</h3>
+            <form id="formTarefa">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" required>
+
+                <label for="prioridade">Prioridade:</label>
+                <select id="prioridade">
+                    <option value="alta">Alta</option>
+                    <option value="media">Média</option>
+                    <option value="baixa">Baixa</option>
+                </select>
+
+                <label for="responsavel">Responsável:</label>
+                <input type="text" id="responsavel">
+
+                <label for="data">Data:</label>
+                <input type="date" id="data">
+
+                <button type="submit">Salvar</button>
+                <button type="button" id="cancelarBtn">Cancelar</button>
+            </form>
+        </div>
+       </div>
+
+       <!-- Footer -->
+        <footer class="footer">
+            <p>Desenvolvido por <a href="https://github.com/victorcarvalho">Victor Carvalho</a> 💻</p>
+        </footer>
+
+        <div id="toastContainer"></div>
+    
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="script.js"></script>
+</body>
+</html>
