@@ -10,55 +10,64 @@
 <body>
     <!-- Header -->
      <header class="header">
-        <button id="btnMenu" class="btn-menu" aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">
-            <span class="hamburguer" aria-hidden="true"></span>
+        <button id="btnMenu" class="btn-menu" 
+          aria-label="Abrir menu" 
+          aria-expanded="false" 
+          aria-controls="sidebar">
+
+            <span class="hamburguer"></span>
         </button>
 
         <div class="logo">
-            <span>⚡</span>
+            <span class="logo-icon">⚡</span>
             <h1>TaskFlow</h1>
         </div>
 
-        <nav class="nav">
-            <ul>
-                <li><a href="#dashboard" class="active">Dashboard</a></li>
-                <li><a href="#tarefas">Tarefas</a></li>
-                <li><a href="#relatorios">Relatórios</a></li>
-            </ul>
+        <nav class="nav" aria-label="Navegação principal">
+            <a href="#dashboard" class="active">Dashboard</a>
+            <a href="#tarefas">Tarefas</a>
+            <a href="#relatorios">Relatórios</a>
         </nav>
      </header>
 
      <!-- Sidebar -->
-      <aside id="sidebar" class="sidebar" aria-hidden="true" aria-labelledby="btnMenu">
-        <div class="sidebar-top">
+      <aside id="sidebar" class="sidebar" aria-hidden="true">
+        <div class="sidebar-header">
             <div class="sidebar-brand">
                 <span>⚡</span>
                 <strong>TaskFlow</strong>
             </div>
-            <button id="btnCloseSidebar" class="btn-close-sidebar" aria-label="Fechar menu">✕</button>
+
+            <button id="btnCloseSidebar" class="sidebar-close" aria-label="Fechar menu">✕</button>
         </div>
 
-        <div class="sidebar-content">
-            <nav class="sidebar-nav" role="navigation">
-                <ul>
-                    <li><a href="#dashboard" class="sidebar-link">Dashboard</a></li>
-                    <li><a href="#tarefas" class="sidebar-link">Tarefas</a></li>
-                    <li><a href="#relatorios" class="sidebar-link">Relatórios</a></li>
-                </ul>
-            </nav>
+        <nav class="sidebar-nav">
+            <a href="#dashboard" class="sidebar-link active">📊 Dashboard</a>
+            <a href="#tarefas" class="sidebar-link">📝 Tarefas</a>
+            <a href="#relatorios" class="sidebar-link">📈 Relatórios</a>
+        </nav>
 
-            <div class="sidebar-actions">
-                <button id="novaTarefaBtnSidebar" class="btn-ghost">+ Nova Tarefa</button>
-                <button id="toggleTipoGraficoSidebar" class="btn-ghost">Alterar Gráfico</button>
-            </div>
+        <div class="sidebar-actions">
+            <button id="novaTarefaBtnSidebar" class="btn-primary">
+                ➕ Nova Tarefa
+            </button>
 
-            <div class="sidebar-footer">
-                <small>Desenvolvido por <a href="https://github.com/victorcarvalhob">Victor Carvalho</a></small>
-            </div>
+            <button id="toggleTipoGraficoSidebar" class="btn-secondary">
+                🔁 Alterar Gráfico
+            </button>
         </div>
+
+        <footer class="sidebar-footer">
+            <small>
+                Desenvolvido por
+                <a href="https://github.com/victorcarvalhob" target="_blank">
+                    Victor Carvalho
+                </a>
+            </small>
+        </footer>
       </aside>
 
-      <div id="sidebarOverlay" class="sidebar-overlay" tabindex="-1" aria-hidden="true"></div>
+      <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
      <!-- Dashboard -->
       <main>
