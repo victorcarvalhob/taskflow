@@ -466,22 +466,37 @@ const sections = document.querySelectorAll("section");
 const menuLinks = document.querySelectorAll(".nav a, .sidebar-link");
 
 function atualizarMenuAtivo() {
-    let indexAtivo = sections.length;
+    let sectionAtual = "";
 
-    while (--indexAtivo && window.scrollY + 140 < sections[indexAtivo].offsetTop) {}
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
 
-    menuLinks.forEach(link => link.classList.remove("active"));
-    if (menuLinks[indexAtivo]) menuLinks[indexAtivo].classList.add("active");
+        if (window.scrollY + 160 >= sectionTop &&
+            window.scrollY + 160 < sectionTop + sectionHeight) {
+                sectionAtual = section.getAttribute("id");
+            }
+});
+
+menuLinks.forEach(link => {
+    link.classList.remove("active");
+
+    if (link.getAttribute("href") === `#${sectionAtual}`) {
+        link.classList.add("active");
+    }
+});
 }
 
 window.addEventListener("scroll", atualizarMenuAtivo);
 
 menuLinks.forEach(link => {
-    link.addEventListener("click", (ev) => {
-        if (sidebar.classList.contains("open")) fecharSidebar();
-
+    link.addEventListener("click", () => {
         menuLinks.forEach(l => l.classList.remove("active"));
-        ev.currentTarget.classList.add("active");
+        link.classList.add("active");
+
+        if (sidebar.classList.contains("open")) {
+            fecharSidebar();
+        }
     });
 });
 
