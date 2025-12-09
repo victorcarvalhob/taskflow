@@ -162,7 +162,7 @@ function renderTarefas() {
         </div>
         <div>
         <button class="editar" data-index="${index}" aria-label="Editar tarefa">✏️</button>
-        <button class="excluir" data-index="${index}" aria-label"Excluir tarefa">🗑️</button>
+        <button class="excluir" data-index="${index}" aria-label="Excluir tarefa">🗑️</button>
         </div>
         `;
         listaTarefas.appendChild(li);
