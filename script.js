@@ -277,7 +277,21 @@ function atualizarDashboard() {
 function atualizarGrafico() {
     const canvas = document.getElementById("graficoProdutividade");
     if (!canvas) return;
+
     const ctx = canvas.getContext("2d");
+
+    // Gradientes
+    const gradConcluidas = ctx.createLinearGradient(0, 0, 0, 300);
+    gradConcluidas.addColorStop(0, "rgba(159, 232, 112, 1)");
+    gradConcluidas.addColorStop(1, "rgba(159, 232, 112, 0.3)");
+
+    const gradPendentes = ctx.createLinearGradient(0, 0, 0, 300);
+    gradPendentes.addColorStop(0, "rgba(255, 209, 112, 0.9)");
+    gradPendentes.addColorStop(1, "rgba(255, 209, 112, 0.3)");
+
+    const gradEficiencia = ctx.createLinearGradient(0, 0, 0, 300);
+    gradEficiencia.addColorStop(0, "rgba(110, 231, 255, 0.9)");
+    gradEficiencia.addColorStop(1, "rgba(110, 231, 255, 0.3)");
 
     const concluidas = tarefas.filter(t => t.concluida).length;
     const pendentes = tarefas.length - concluidas;
@@ -289,41 +303,54 @@ function atualizarGrafico() {
             label: "Produtividade",
             data: [concluidas, pendentes, eficiencia],
             backgroundColor: [
-                "rgba(159, 232, 112, 0.8)",
-                "rgba(123, 123, 123, 0.6)",
-                "rgba(255, 255, 255, 0.3)"
+                gradConcluidas,
+                gradPendentes,
+                gradEficiencia
             ],
-            borderColor: [ "#9FE870", "#7B7B7B", "#FFFFFF" ],
-            borderWidth: 2,
-            borderRadius: 8,
-            tension: 0.3
+            borderWidth: 0,
+            borderRadius: 12,
+            tension: 0.4,
+            fill: true
         }]
     };
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
+            legend: {
+                labels: {
+                    color: "#CFEFD0",
+                    font: { size: 13 }
+                }
+            },
+            tooltip: {
+                backgroundColor: "rgba(6, 47, 40, 0.95)",
+                titleColor: "#9FE870",
+                bodyColor: "#FFFFFF",
+                borderWidth: 1,
+                borderColor: "rgba(255,255,255,0.12)",
+                padding: 12,
+                cornerRadius: 8
+            },
             title: {
                 display: true,
-                text: "Produtividade Geral",
+                text: "📊 Produtividade Geral",
                 color: "#9FE870",
-                padding: 14,
+                padding: 20,
                 font: { size: 18, family: "Space Grotesk", weight: "700" }
-            },
-            legend: {
-                labels: { color: "#FFF" }
             }
         },
-        animation: { duration: 900, easing: "easeOutQuart" },
+        animation: { duration: 1200, easing: "easeOutQuart" },
         scales: {
             y: {
                 beginAtZero: true,
-                ticks: { color: "#9FE870"},
+                ticks: { color: "#9FE870", font: { size: 12 } },
                 grid: { color: "rgba(255, 255, 255, 0.05)" }
             },
             x: {
-                ticks: { color: "#9FE870" },
-                grid: { color: "rgba(255, 255, 255, 0.05)" }
+                ticks: { color: "#9FE870", font: { size: 12 } },
+                grid: { display: false }
             }
         }
     };
