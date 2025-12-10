@@ -153,16 +153,35 @@ function renderTarefas() {
         const index =  tarefas.indexOf(tarefa);
 
         const li = document.createElement("li");
+        li.classList.add("task-card");
+
         li.innerHTML = `
-        <div>
-        <input type="checkbox" ${tarefa.concluida ? "checked" : ""} data-index="${index}" class="checkTarefa" aria-label="Marcar tarefa">
-        <span style="${tarefa.concluida ? "text-decoration: line-through; color: #9FE870;" : ""}">
-        ${tarefa.titulo} - <small>${tarefa.prioridade}</small>
+        <div class="task-left">
+        <label class="task-check">
+        <input type="checkbox" ${tarefa.concluida ? "checked" : ""} 
+        data-index="${index}" 
+        class="checkTarefa">
+        <span class="checkmark"></span>
+        </label>
+
+        <div class="task-info">
+        <h4 class="${tarefa.concluida ? "done" : ""}">
+        ${tarefa.titulo}
+        </h4>
+
+        <div class="task-meta">
+        <span class="tag prioridade ${tarefa.prioridade}">
+        ${tarefa.prioridade}
         </span>
+        ${tarefa.data ? `<span class="tag data">📅 ${tarefa.data}</span>` : ""}
+        ${tarefa.responsavel ? `<span class="tag user">👤 ${tarefa.responsavel}</span>` : ""}
         </div>
-        <div>
-        <button class="editar" data-index="${index}" aria-label="Editar tarefa">✏️</button>
-        <button class="excluir" data-index="${index}" aria-label="Excluir tarefa">🗑️</button>
+        </div>
+        </div>
+
+        <div class="task-actions">
+        <button class="editar" data-index="${index}" title="Editar">✏️</button>
+        <button class="excluir" data-index="${index}" title="Excluir">🗑️</button>
         </div>
         `;
         listaTarefas.appendChild(li);

@@ -463,7 +463,124 @@ body {
     background: #B2F58A;
 }
 
-/* Lista de Tarefas */
+/* ==== Gerenciador de Tarefas ==== */
+.task-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 20px;
+    border-radius: 16px;
+
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.task-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.task-card:has(input:checked) {
+    border-left: 4px solid #9FE870;
+    background: rgba(159, 232, 112, 0.08);
+}
+
+.task-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+/* Checkbox */
+.task-check {
+    position: relative;
+}
+
+.task-check input {
+    display: none;
+}
+
+.task-check .checkmark {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid #9FE870;
+    cursor: pointer;
+    display: block;
+    position: relative;
+}
+
+.task-check input:checked + .checkmark {
+    background: #9FE870;
+}
+
+.task-check input:checked + .checkmark::after {
+    content: "✔";
+    position: absolute;
+    color: #062F28;
+    font-size: 14px;
+    font-weight: bold;
+    top: 1px;
+    left: 4px;
+}
+
+/* Info */
+.task-info h4 {
+    font-size: 16px;
+    font-weight: 600;
+}
+.task-info h4.done {
+    text-decoration: line-through;
+    color: #9FE870;
+}
+
+.task-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+/* Tags */
+.tag {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Prioridades */
+.prioridade.alta {
+    background: rgba(255, 95, 95, 0.2);
+    color: #FF6B6B;
+}
+
+.prioridade.media {
+    background: rgba(255, 209, 102, 0.2);
+    color: #FFD166;
+}
+
+.prioridade.baixa {
+    background: rgba(159, 232, 112, 0.2);
+    color: #9FE870;
+}
+
+/* Ações */
+.task-actions button {
+    font-size: 18px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.task-actions button:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
 .tarefas-header {
     display: flex;
     align-items: center;
@@ -544,8 +661,9 @@ body {
 }
 
 .filtro.ativo {
-    background: #9FE870;
+    background: linear-gradient(90deg, #9FE870, #B2F58A);
     color: #062F28;
+    box-shadow: 0 4px 14px rgba(159, 232, 112, 0.4);
 }
 
 /* Relatórios */
