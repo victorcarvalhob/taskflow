@@ -637,33 +637,57 @@ body {
     opacity: 0.7;
 }
 
+/* ==== Filtros ==== */
 .filtros {
     display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 24px;
     flex-wrap: wrap;
+
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 12px;
+    border-radius: 14px;
+    backdrop-filter: blur(8px);
 }
 
 .filtro {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: #9FE870;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 8px 16px;
+    border-radius: 999px;
+
+    color: var(--text-muted);
     font-size: 14px;
     font-weight: 600;
-    transition: background 0.3s ease, opacity 0.3s ease;
+
+    cursor: pointer;
+    transition: 0.25s ease;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .filtro:hover {
-    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
 }
 
+/* Estado Ativo - Filtro Selecionado */
 .filtro.ativo {
-    background: linear-gradient(90deg, #9FE870, #B2F58A);
-    color: #062F28;
-    box-shadow: 0 4px 14px rgba(159, 232, 112, 0.4);
+    background: linear-gradient(90deg, #9FE870, #B6FF9C);
+    border-color: rgba(159, 232, 112, 0.8);
+    color: #062F28 !important;
+    box-shadow: 0 4px 18px rgba(159, 232, 112, 0.35);
+    transform: translateY(-2px);
+}
+
+/* Anel de foco acessível */
+.filtro:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(159, 232, 112, 0.45);
 }
 
 /* Relatórios */
