@@ -416,41 +416,61 @@ function gerarRelatorio() {
     const relatorio = document.getElementById("relatorioConteudo");
 
     if (tarefas.length === 0) {
-        relatorio.innerHTML = `<p>Nenhum dado disponível ainda. Adicione algumas tarefas!<p>`;
+        relatorio.innerHTML = `<p>Nenhum dado disponível ainda. Complete algumas tarefas!</p>`;
         return;
     }
 
     const total = tarefas.length;
     const concluidas = tarefas.filter(t => t.concluida).length;
     const pendentes = total - concluidas;
-    const eficiencia = total > 0 ? Math.round((concluidas / total) * 100) : 0;
+    const eficiencia = Math.round((concluidas / total) * 100);
 
-    const prioridadeOrdem = { alta: 1, media: 2, baixa: 3};
+    const prioridadeOrdem = { alta: 1, media: 2, baixa: 3 };
 
     const tarefaPrioritaria = tarefas
     .filter(t => !t.concluida)
     .sort((a, b) => prioridadeOrdem[a.prioridade] - prioridadeOrdem[b.prioridade])[0];
 
-    let blocoPrioritaria = "";
-
-    if (tarefaPrioritaria) {
-        blocoPrioritaria = `<h3 style="color:#9FE870; margin-top:20px;">📌 Tarefa Prioritária</h3>
+    relatorio.innerHTML = `
+    <div class="relatorio-card success">
+    <h4>✅ Concluídas</h4>
+    <strong>${concluidas}</strong>
+    </div>
+    
+    <div class="relatorio-card warning">
+    <h4>⏳ Pendentes</h4>
+    <strong>${pendentes}</strong>
+    </div>
+    
+    <div class="relatorio-card info">
+    <h4>⚡ Eficiência</h4>
+    <strong>${eficiencia}<span>%</span></strong>
+    </div>
+    
+    <div class="relatorio-card relatorio-highlight">
+    <h4>💡 Insight Geral</h4>
+    <p>
+    ${
+        eficiencia >= 70
+        ? "Excelente produtividade! Continue nesse ritmo 💚"
+        : "Produtividade moderada. Pequenos ajustes podem ajudar 🚀"
+    }
+    </p>
+    </div>
+    
+    ${
+        tarefaPrioritaria
+        ? `
+        <div class="relatorio-card relatorio-highlight">
+        <h4>📌 Tarefa Prioritária</h4>
         <p><strong>${tarefaPrioritaria.titulo}</strong></p>
         <p>Prioridade: ${tarefaPrioritaria.prioridade}</p>
         <p>Responsável: ${tarefaPrioritaria.responsavel || "—"}</p>
-        <p>Prazo: ${tarefaPrioritaria.data || "—"}</p>`;
+        <p>Prazo: ${tarefaPrioritaria.data || "—"}</p>
+        `
+        : ""
     }
-
-    relatorio.innerHTML = `<h3 style="color:#9FE870;">📊 Resumo Geral</h3>
-    <p>Total de tarefas: <strong>${total}</strong></p>
-    <p>Concluídas: <strong>${concluidas}</strong></p>
-    <p>Pendentes: <strong>${pendentes}</strong></p>
-    <p>Eficiência: <strong>${eficiencia}%</strong></p>
-    
-    <h3 style="color:#9FE870; margin-top:20px;">💡 Insights</h3>
-    <p>${eficiencia >= 70 ? "Sua produtividade está muito boa! 💚" : "Continue! Você pode melhorar. 🚀"}</p>
-    
-    ${blocoPrioritaria}`;
+    `;
 }
 
 // 12. Automação 

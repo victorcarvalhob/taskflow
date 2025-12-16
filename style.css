@@ -690,12 +690,69 @@ body {
     box-shadow: 0 0 0 3px rgba(159, 232, 112, 0.45);
 }
 
-/* Relatórios */
+/* ==== Relatórios ==== */
+.relatorio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 32px;
+}
+
+.relatorio-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 22px;
+    backdrop-filter: blur(14px);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.relatorio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+}
+
+.relatorio-card h4 {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.relatorio-card strong {
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.relatorio-card.success strong {
+    color: #9FE870;
+}
+
+.relatorio-card.warning strong {
+    color: #FFD166;
+}
+
+.relatorio-card.info strong {
+    color: #6EE7FF;
+}
+
+.relatorio-card strong span {
+    font-size: 18px;
+    margin-left: 2px;
+}
+
+.relatorio-highlight {
+    grid-column: 1 / -1;
+    background: linear-gradient(90deg, rgba(159,232,112,0.18), rgba(159,232,112,0.05));
+    border-left: 5px solid #9FE870;
+}
+
 #relatorios {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
 }
 
 #relatorioConteudo {
