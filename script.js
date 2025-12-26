@@ -1,3 +1,81 @@
+// Header / Navegação Mobile
+const btnNavToggle = document.getElementById("btnNavToggle");
+const mainNav = document.getElementById("mainNav");
+const profileBtn = document.getElementById("profileBtn");
+const profileMenu = document.getElementById("profileMenu");
+const searchInput = document.getElementById("searchInput");
+const searchClear =  document.getElementById("searchClear");
+
+if (btnNavToggle && mainNav) {
+    btnNavToggle.addEventListener("click", () => {
+        const open = mainNav.classList.toggle("open");
+        btnNavToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        mainNav.setAttribute("aria-hidden", open ? "false" : "true");
+
+        if (open) {
+            const firstLink = mainNav.querySelector("a");
+            if (firstLink) firstLink.focus();
+        } else {
+            btnNavToggle.focus();
+        }
+    });
+}
+
+if (profileBtn && profileMenu) {
+    function abrirProfileMenu() {
+        profileMenu.classList.add("open");
+        profileMenu.setAttribute("aria-hidden", "false");
+        profileBtn.setAttribute("aria-expanded", "true");
+        const primeiro = profileMenu.querySelector("[role='menuitem']");
+        if (primeiro) primeiro.focus();
+    }
+    function fecharProfileMenu() {
+        profileMenu.classList.remove("open");
+        profileMenu.setAttribute("aria-hidden", "true");
+        profileBtn.setAttribute("aria-expanded", "false");
+    }
+
+    profileBtn.addEventListener("click", (e) => {
+        const aberto = profileMenu.classList.contains("open");
+        if (aberto) fecharProfileMenu();
+        else abrirProfileMenu();
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!profileMenu.contains(e.target) && !profileBtn.contains(e.target)) {
+            fecharProfileMenu();
+        }
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            fecharProfileMenu();
+        }
+    });
+}
+
+if (searchInput) {
+    function atualizarClear() {
+        if (searchInput.value && searchClear) searchClear.hidden = false;
+        else if (searchClear) searchClear.hidden = true;
+    }
+
+    searchInput.addEventListener("input", () => {
+        atualizarClear();
+
+
+    });
+
+    if (searchClear) {
+        searchClear.addEventListener("click", () => {
+            searchInput.value = "";
+            atualizarClear();
+            searchInput.focus();
+            
+        });
+    }
+}
+
 // Elementos Principais
 const novaTarefaBtn = document.getElementById("novaTarefaBtn");
 const novaTarefaBtnSidebar = document.getElementById("novaTarefaBtnSidebar");
@@ -93,6 +171,12 @@ document.addEventListener("keydown", (e) => {
 
         if (sidebar.classList.contains("open")) {
             fecharSidebar();
+        }
+
+        if (mainNav && mainNav.classList.contains("open")) {
+            mainNav.classList.remove("open");
+            if (btnNavToggle) btnNavToggle.setAttribute("aria-expanded", "false");
+            mainNav.setAttribute("aria-hidden", "true");
         }
     }
 });
@@ -560,8 +644,14 @@ menuLinks.forEach(link => {
         menuLinks.forEach(l => l.classList.remove("active"));
         link.classList.add("active");
 
-        if (sidebar.classList.contains("open")) {
+        if (sidebar && sidebar.classList.contains("open")) {
             fecharSidebar();
+        }
+
+        if (mainNav && mainNav.classList.contains("open")) {
+            mainNav.classList.remove("open");
+            if (btnNavToggle) btnNavToggle.setAttribute("aria-expanded", "false");
+            mainNav.setAttribute("aria-hidden", "true");
         }
     });
 });

@@ -9,26 +9,57 @@
 </head>
 <body>
     <!-- Header -->
-     <header class="header">
-        <button id="btnMenu" class="btn-menu" 
-          aria-label="Abrir menu" 
-          aria-expanded="false" 
-          aria-controls="sidebar">
-
-            <span class="hamburguer"></span>
+     <header class="header" role="banner">
+        <div class="header-left">
+            <button id="btnMenu" class="btn-menu" 
+            aria-label="Abrir menu lateral" 
+            aria-expanded="false" 
+            aria-controls="sidebar">
+            <span class="hamburguer" aria-hidden="true"></span>
         </button>
-
-        <div class="logo">
-            <span class="logo-icon">⚡</span>
+        
+        <div class="logo" aria-hidden="false">
+            <span class="logo-icon" aria-hidden="true">⚡</span>
             <h1>TaskFlow</h1>
         </div>
+    </div>
 
-        <nav class="nav" aria-label="Navegação principal">
+    <div class="header-center">
+        <nav id="mainNav" class="nav" aria-label="Navegação principal" aria-hidden="false">
             <a href="#dashboard" class="active">Dashboard</a>
             <a href="#tarefas">Tarefas</a>
             <a href="#relatorios">Relatórios</a>
         </nav>
-     </header>
+
+        <button id="btnNavToggle" class="btn-nav-toggle" aria-label="Abrir navegação" aria-expanded="false" aria-controls="mainNav">
+            <span class="visually-hidden">Abrir navegação</span>
+            ☰
+        </button>
+    </div>
+
+    <div class="header-right">
+        <div class="search">
+            <label for="searchInput" class="visually-hidden">Buscar tarefas</label>
+            <input id="searchInput" type="search" placeholder="Buscar tarefas..." aria-label="Buscar tarefas">
+            <button id="searchClear" class="search-clear" aria-label="Limpar busca" hidden>✕</button>   
+        </div>
+
+        <div class="profile">
+            <button id="profileBtn" class="profile-btn" aria-haspopup="true" aria-expanded="false" aria-controls="profileMenu" title="Abrir menu do usuário">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect width="24" height="24" rx="6" fill="#9FE870"></rect>
+                    <path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 2c-3.3 0-6 1.7-6 4v1h12v-1c0-2.3-2.7-4-6-4z" fill="#062F28"/>
+                </svg>
+            </button>
+
+            <div id="profileMenu" class="profile-menu" role="menu" aria-hidden="true">
+                <a href="#" role="menuitem">Perfil</a>
+                <a href="#" role="menuitem">Configurações</a>
+                <button id="logoutBtn" role="menuitem">Sair</button>
+            </div>
+        </div>
+    </div>
+</header>
 
      <!-- Sidebar -->
       <aside id="sidebar" class="sidebar" aria-hidden="true">
@@ -60,7 +91,7 @@
         <footer class="sidebar-footer">
             <small>
                 Desenvolvido por
-                <a href="https://github.com/victorcarvalhob" target="_blank">
+                <a href="https://github.com/victorcarvalhob" target="_blank" rel="noopener noreferrer">
                     Victor Carvalho
                 </a>
             </small>
@@ -180,7 +211,7 @@
 
        <!-- Footer -->
         <footer class="footer">
-            <p>Desenvolvido por <a href="https://github.com/victorcarvalho">Victor Carvalho</a> 💻</p>
+            <p>Desenvolvido por <a href="https://github.com/victorcarvalho" target="_blank" rel="noopener noreferrer">Victor Carvalho</a> 💻</p>
         </footer>
 
         <div id="toastContainer"></div>
